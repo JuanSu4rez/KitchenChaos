@@ -17,7 +17,7 @@ namespace _Project.Scripts.PlayerStateMachine
         {
             if (Vector2.zero != _player.GameInput.GetMovementVectorNormalized())
             {
-                _player.TransitionToState(_player.WalkingState);
+                _player.TransitToState(_player.WalkingState);
             }
         }
     }

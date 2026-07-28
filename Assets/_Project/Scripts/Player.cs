@@ -43,7 +43,7 @@ namespace _Project.Scripts
             _currentState.Update();
         }
 
-        public void TransitionToState(IPlayerBaseState newState)
+        public void TransitToState(IPlayerBaseState newState)
         {
             if (_currentState == newState)
             {

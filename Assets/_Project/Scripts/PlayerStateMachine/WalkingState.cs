@@ -18,7 +18,7 @@ namespace _Project.Scripts.PlayerStateMachine
             Vector2 inputVector = _player.GameInput.GetMovementVectorNormalized();
             if (inputVector == Vector2.zero)
             {
-                _player.TransitionToState(_player.IdleState);
+                _player.TransitToState(_player.IdleState);
                 return;
             }
             
