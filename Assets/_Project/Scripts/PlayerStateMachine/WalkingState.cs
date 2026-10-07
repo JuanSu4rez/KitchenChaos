@@ -16,6 +16,7 @@ namespace _Project.Scripts.PlayerStateMachine
         public override void Update()
         {
             Vector2 inputVector = _player.GameInput.GetMovementVectorNormalized();
+            
             if (inputVector == Vector2.zero)
             {
                 _player.TransitToState(_player.IdleState);
@@ -23,6 +24,22 @@ namespace _Project.Scripts.PlayerStateMachine
             }
             
             Vector3 movement = new Vector3(inputVector.x, 0, inputVector.y);
+            
+            float moveDistance = _player.Speed * Time.deltaTime;
+
+            Debug.DrawRay(_player.transform.position, movement * 5f, Color.red);
+            
+            // Check whether we can move
+            if (Physics.Raycast(
+                    _player.transform.position,
+                    movement,
+                    out RaycastHit hitInfo,
+                    moveDistance))
+            {
+                Debug.Log($"Blocked by {hitInfo.collider.name}");
+                return;
+            }
+            
             _player.transform.position += movement * (_player.Speed * Time.deltaTime);
             
             float rotateSpeed = 10f;

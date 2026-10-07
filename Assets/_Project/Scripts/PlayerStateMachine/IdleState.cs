@@ -15,7 +15,9 @@ namespace _Project.Scripts.PlayerStateMachine
 
         public override void Update()
         {
-            if (Vector2.zero != _player.GameInput.GetMovementVectorNormalized())
+            Vector2 inputVector = _player.GameInput.GetMovementVectorNormalized();
+
+            if (inputVector != Vector2.zero)
             {
                 _player.TransitToState(_player.WalkingState);
             }
