@@ -4,6 +4,7 @@ namespace _Project.Scripts.PlayerStateMachine
 {
     public class WalkingState : IPlayerBaseState
     {
+        private const float ROTATE_SPEED = 10f;
         private Player _player;
         
         public WalkingState(Player player) => _player = player;
@@ -13,37 +14,62 @@ namespace _Project.Scripts.PlayerStateMachine
             Debug.Log("Running State Entered");
         }
 
+
         public override void Update()
         {
             Vector2 inputVector = _player.GameInput.GetMovementVectorNormalized();
-            
+    
             if (inputVector == Vector2.zero)
             {
                 _player.TransitToState(_player.IdleState);
                 return;
             }
+    
+            float movementDistance = _player.Speed * Time.deltaTime;
+            Vector3 movementDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
+    
+            // Try to move in the desired direction ... 
+            if (TryMoveInDirection(movementDirection, movementDistance)) return;
             
-            Vector3 movement = new Vector3(inputVector.x, 0, inputVector.y);
+            // ... if that fails, try to move in the x direction only ...
+            if (TryMoveInDirection(new Vector3(inputVector.x, 0, 0).normalized, movementDistance)) return;
             
-            float moveDistance = _player.Speed * Time.deltaTime;
-
-            Debug.DrawRay(_player.transform.position, movement * 5f, Color.red);
-            
-            // Check whether we can move
-            if (Physics.Raycast(
-                    _player.transform.position,
-                    movement,
-                    out RaycastHit hitInfo,
-                    moveDistance))
-            {
-                Debug.Log($"Blocked by {hitInfo.collider.name}");
-                return;
-            }
-            
-            _player.transform.position += movement * (_player.Speed * Time.deltaTime);
-            
-            float rotateSpeed = 10f;
-            _player.transform.forward = Vector3.Slerp(_player.transform.forward, movement, Time.deltaTime * rotateSpeed);
+            // ... if that fails, try to move in the z direction only ...
+            if (TryMoveInDirection(new Vector3(0, 0, inputVector.y).normalized, movementDistance)) ;
         }
+
+        private bool TryMoveInDirection(Vector3 direction, float distance)
+        {
+            if (CheckIfPlayerCollides(direction, distance))
+            {
+                return false;
+            }
+    
+            _player.transform.position += direction * (_player.Speed * Time.deltaTime);
+            _player.transform.forward = Vector3.Slerp(
+                _player.transform.forward, 
+                direction, 
+                Time.deltaTime * ROTATE_SPEED
+            );
+            return true;
+        }
+        
+        
+        // I use a capsule cast to check for collisions,
+        // which is more accurate than a raycast for a player character,
+        // as it takes into account the player's height and radius.
+        private bool CheckIfPlayerCollides(Vector3 movementDirection, float movementDistance)
+        {
+            float playerRadius = .7f;
+            float playerHeight = 2f;
+            
+            return Physics.CapsuleCast(
+                _player.transform.position, 
+                _player.transform.position + Vector3.up * playerHeight, 
+                playerRadius,
+                movementDirection,
+                movementDistance);
+        }
+        
     }
 }
