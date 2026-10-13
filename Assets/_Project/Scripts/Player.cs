@@ -8,6 +8,8 @@ namespace _Project.Scripts
     {
         [SerializeField] private float speed = 7f;
         [SerializeField] private GameInput gameInput;
+
+        public ClearCounter SelectedCounter { get; set; }
         
         public float Speed => speed;
         public GameInput GameInput => gameInput;
@@ -36,6 +38,10 @@ namespace _Project.Scripts
         {
             _currentState = IdleState;
             IdleState.EnterState();
+            
+            //Interaction events E for spawning, F for chopping, mixing, etc
+            GameInput.OnPrimaryInteraction += PrimaryInteractionDone;
+            GameInput.OnSecondaryInteraction += SecondaryInteractionDone;
         }
 
         private void Update()
@@ -53,5 +59,16 @@ namespace _Project.Scripts
             _currentState = newState;
             _currentState.EnterState();
         }
+        
+        private void PrimaryInteractionDone(object sender, EventArgs e)
+        {
+            Debug.Log("Primary interaction done");
+        }
+
+        private void SecondaryInteractionDone(object sender, EventArgs e)
+        {
+            Debug.Log("Secondary interaction done");
+        }
+
     }
 }
