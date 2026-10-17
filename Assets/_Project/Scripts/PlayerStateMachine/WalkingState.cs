@@ -36,9 +36,6 @@ namespace _Project.Scripts.PlayerStateMachine
             float movementDistance = _player.Speed * Time.deltaTime;
             Vector3 movementDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
     
-            
-            CheckIfPlayerCanInteract(movementDirection, movementDistance);
-            
             // Try to move in the desired direction ... 
             if (TryMoveInDirection(movementDirection, movementDistance)) return;
             
@@ -76,10 +73,5 @@ namespace _Project.Scripts.PlayerStateMachine
                 movementDistance);
         }
 
-        private void CheckIfPlayerCanInteract(Vector3 movementDirection, float movementDistance)
-        {
-            var f = Physics.Raycast(_player.transform.position, movementDirection, out RaycastHit hit, movementDistance + 3);
-            Debug.Log((GameObject)hit.collider.gameObject);
-        }
     }
 }

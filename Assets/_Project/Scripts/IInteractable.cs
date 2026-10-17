@@ -8,8 +8,15 @@ namespace _Project.Scripts
         
         //TODO - This is actually a collection, not a single object,
         // an Stack maybe?, a proper structure should be used
-        public GameObject GetObject();
+        public KitchenObject GetKitchenObject();
+        
+        public void Interact(Player interactor);
 
-        public void AddObject(GameObject obj);
+        public void SetKitchenObject(KitchenObject kitchenObject);
+        
+        
+        public void ClearKitchenObject();
+
+        public Transform GetParentingPoint();
     }
 }

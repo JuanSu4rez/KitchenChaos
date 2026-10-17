@@ -4,24 +4,41 @@ using UnityEngine;
 
 namespace _Project.Scripts
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IInteractable
     {
+        
+        public static Player Instance { get; private set; }
+        
+        // Events
+        public event EventHandler<OnSelectedInteractableChangedEventArgs> OnInteractableFaced;
+
+        public class OnSelectedInteractableChangedEventArgs : EventArgs
+        {
+            public IInteractable SelectedInteractable;
+        }
+        
+        
+        [SerializeField] private Transform attachmentPoint;
         [SerializeField] private float speed = 7f;
         [SerializeField] private GameInput gameInput;
 
-        public ClearCounter SelectedCounter { get; set; }
+        private KitchenObject kitchenObject;
+        
+        
+        private Vector3 _lastInteractDirection;
+        public IInteractable SelectedObject { get; set; }
+        public Transform HeldObject { get; set; }
         
         public float Speed => speed;
         public GameInput GameInput => gameInput;
         
-        #region playerStates
+        // PlayerStates
         
         private IPlayerBaseState _currentState;
         public IdleState IdleState;
         public WalkingState WalkingState;
         public InteractingState InteractingState;
         
-        #endregion playerStates
         
         public bool IsWalking => _currentState == WalkingState;
         public bool IsIdle => _currentState == IdleState;
@@ -29,6 +46,12 @@ namespace _Project.Scripts
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Debug.Log("There is more than one Player instance");
+            }
+            
+            Instance = this;
             IdleState = new IdleState(this);
             WalkingState = new WalkingState(this);
             InteractingState = new InteractingState(this);
@@ -40,13 +63,15 @@ namespace _Project.Scripts
             IdleState.EnterState();
             
             //Interaction events E for spawning, F for chopping, mixing, etc
-            GameInput.OnPrimaryInteraction += PrimaryInteractionDone;
+            GameInput.OnPrimaryInteraction += PrimaryInteractionPerformed;
             GameInput.OnSecondaryInteraction += SecondaryInteractionDone;
         }
 
         private void Update()
         {
             _currentState.Update();
+            
+            CheckIfPlayerCanInteract();
         }
 
         public void TransitToState(IPlayerBaseState newState)
@@ -60,9 +85,12 @@ namespace _Project.Scripts
             _currentState.EnterState();
         }
         
-        private void PrimaryInteractionDone(object sender, EventArgs e)
+        private void PrimaryInteractionPerformed(object sender, EventArgs e)
         {
-            Debug.Log("Primary interaction done");
+            if (SelectedObject != null)
+            {
+                SelectedObject.Interact(this);
+            }
         }
 
         private void SecondaryInteractionDone(object sender, EventArgs e)
@@ -70,5 +98,57 @@ namespace _Project.Scripts
             Debug.Log("Secondary interaction done");
         }
 
+        
+        // Check if the player can interact with an object in their line of sight.
+        private void CheckIfPlayerCanInteract()
+        {
+            Vector2 inputVector = GameInput.GetMovementVectorNormalized();
+            Vector3 movementDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
+
+            if (movementDirection != Vector3.zero)
+            {
+                _lastInteractDirection = movementDirection;
+            }
+
+            var interactionDistance = 1.5f;
+            if (Physics.Raycast(transform.position, _lastInteractDirection, out RaycastHit hit, interactionDistance))
+            {
+                if(hit.transform.TryGetComponent(out IInteractable interactable))
+                {
+                    SetSelectedInteractable(interactable);
+                    return;
+                }
+            }
+            SetSelectedInteractable(null);
+        }
+
+        private void SetSelectedInteractable(IInteractable interactable)
+        {
+            if (SelectedObject == interactable)
+            {
+                return;
+            }
+
+            SelectedObject = interactable;
+            OnInteractableFaced?.Invoke(this, new OnSelectedInteractableChangedEventArgs
+            {
+                SelectedInteractable = interactable
+            });
+        }
+
+        public void Interact(Player interactor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Transform GetParentingPoint() => attachmentPoint;
+
+        public void SetKitchenObject(KitchenObject obj) => kitchenObject = obj;
+
+        public KitchenObject GetKitchenObject() => kitchenObject;
+        
+        public void ClearKitchenObject() => kitchenObject = null;
+        
+        public bool IsAvailable() => kitchenObject == null;
     }
 }
