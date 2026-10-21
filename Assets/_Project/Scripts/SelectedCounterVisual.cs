@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectedCounterVisual : MonoBehaviour
 {
-    [SerializeField] private ClearCounter selectedCounter;
+    [SerializeField] private Interactable selectedCounter;
     [SerializeField] private GameObject visualGameObject;
 
     private void Start()

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace _Project.Scripts
 {
 
-    public class ClearCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
+    public class ClearCounter : Interactable, IKitchenObjectParent
     {
 
         [SerializeField] private Transform attachmentPoint;
@@ -15,7 +15,7 @@ namespace _Project.Scripts
 
 
 
-        public void Interact(Player interactor)
+        public override void Interact(Player interactor)
         {   
             //Interactor IS EMPTY HANDED
             if (!interactor.HasAnObject())

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Scripts
 {
-    public class ContainerCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
+    public class ContainerCounter : Interactable, IKitchenObjectParent
     {
         [SerializeField] private Transform attachmentPoint;
         [SerializeField] private KitchenObjectSO kitchenObjectSo;
@@ -11,7 +11,7 @@ namespace _Project.Scripts
 
 
 
-        public void Interact(Player interactor)
+        public override void Interact(Player interactor)
         {   
             //Interactor IS EMPTY HANDED
             if (!interactor.HasAnObject())

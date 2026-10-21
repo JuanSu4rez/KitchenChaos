@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts
 {
-    public class Player : MonoBehaviour, IInteractable, IKitchenObjectParent
+    public class Player : MonoBehaviour, IKitchenObjectParent
     {
         
         public static Player Instance { get; private set; }
@@ -14,7 +14,7 @@ namespace _Project.Scripts
 
         public class OnSelectedInteractableChangedEventArgs : EventArgs
         {
-            public IInteractable SelectedInteractable;
+            public Interactable SelectedInteractable;
         }
         
         
@@ -26,7 +26,7 @@ namespace _Project.Scripts
         
         
         private Vector3 _lastInteractDirection;
-        public IInteractable SelectedObject { get; set; }
+        public Interactable SelectedObject { get; set; }
         public Transform HeldObject { get; set; }
         
         public float Speed => speed;
@@ -113,7 +113,7 @@ namespace _Project.Scripts
             var interactionDistance = 1.5f;
             if (Physics.Raycast(transform.position, _lastInteractDirection, out RaycastHit hit, interactionDistance))
             {
-                if(hit.transform.TryGetComponent(out IInteractable interactable))
+                if(hit.transform.TryGetComponent(out Interactable interactable))
                 {
                     SetSelectedInteractable(interactable);
                     return;
@@ -122,7 +122,7 @@ namespace _Project.Scripts
             SetSelectedInteractable(null);
         }
 
-        private void SetSelectedInteractable(IInteractable interactable)
+        private void SetSelectedInteractable(Interactable interactable)
         {
             if (SelectedObject == interactable)
             {
