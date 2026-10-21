@@ -8,12 +8,12 @@ namespace _Project.Scripts
         
         
         //The parent object where the kitchenObject is located
-        private IInteractable _interactableParent;
+        private IKitchenObjectParent _interactableParent;
         
         
         public KitchenObjectSO GetKitchenObjectSo() => kitchenObjectSO;
         
-        public void SetInteractableParent(IInteractable interactable)
+        public void SetInteractableParent(IKitchenObjectParent interactable)
         {
             if (_interactableParent != null)
             {
@@ -21,7 +21,7 @@ namespace _Project.Scripts
             }
             
             _interactableParent = interactable;
-            if (!interactable.IsAvailable())
+            if (interactable.HasAnObject())
             {
                 Debug.Log("Interactable is not available");
                 return;
@@ -33,7 +33,5 @@ namespace _Project.Scripts
             transform.parent = _interactableParent.GetParentingPoint();
             transform.localPosition = Vector3.zero;
         }
-        
-        public IInteractable GetInteractable() => _interactableParent;
     }
 }

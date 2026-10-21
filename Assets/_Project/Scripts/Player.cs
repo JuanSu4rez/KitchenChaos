@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts
 {
-    public class Player : MonoBehaviour, IInteractable
+    public class Player : MonoBehaviour, IInteractable, IKitchenObjectParent
     {
         
         public static Player Instance { get; private set; }
@@ -138,7 +138,7 @@ namespace _Project.Scripts
 
         public void Interact(Player interactor)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Transform GetParentingPoint() => attachmentPoint;
@@ -149,6 +149,6 @@ namespace _Project.Scripts
         
         public void ClearKitchenObject() => kitchenObject = null;
         
-        public bool IsAvailable() => kitchenObject == null;
+        public bool HasAnObject() => kitchenObject != null;
     }
 }

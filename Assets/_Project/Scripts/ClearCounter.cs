@@ -5,7 +5,7 @@ using UnityEngine;
 namespace _Project.Scripts
 {
 
-    public class ClearCounter : MonoBehaviour, IInteractable
+    public class ClearCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
     {
 
         [SerializeField] private Transform attachmentPoint;
@@ -17,16 +17,11 @@ namespace _Project.Scripts
 
         public void Interact(Player interactor)
         {   
-            //Interactor DOES NOT HAVE an object
-            if (interactor.IsAvailable())
+            //Interactor IS EMPTY HANDED
+            if (!interactor.HasAnObject())
             {
-                //THERE IS NO OBJECT ON THIS COUNTER -> SPAWN A NEW ONE
-                if (IsAvailable())
-                {
-                    Transform kitchenObjectTransform = Instantiate(kitchenObjectSo.prefab, attachmentPoint);
-                    kitchenObjectTransform.GetComponent<KitchenObject>().SetInteractableParent(this);
-                    return;
-                } 
+                //THERE IS NO OBJECT ON THIS COUNTER -> DO NOTHING
+                if (!HasAnObject()) return;
                 
                 //THERE IS AN OBJECT ON THIS COUNTER -> GIVE IT TO INTERACTOR
                 kitchenObject.SetInteractableParent(interactor);
@@ -34,7 +29,7 @@ namespace _Project.Scripts
             }
             
             //INTERACTOR HAS AN OBJECT AND COUNTER IS AVAILABLE -> DROP IT HERE 
-            if (IsAvailable())
+            if (!HasAnObject())
             {
                 var objectFromInteractor = interactor.GetKitchenObject(); 
                 objectFromInteractor.GetComponent<KitchenObject>().SetInteractableParent(this);
@@ -50,6 +45,6 @@ namespace _Project.Scripts
         
         public void ClearKitchenObject() => kitchenObject = null;
         
-        public bool IsAvailable() => kitchenObject == null;
+        public bool HasAnObject() => kitchenObject != null;
     }
 }
