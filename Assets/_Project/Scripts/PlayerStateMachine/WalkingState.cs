@@ -28,7 +28,6 @@ namespace _Project.Scripts.PlayerStateMachine
             }
     
             Walk(inputVector);
-            
         }
 
         private void Walk(Vector2 inputVector)
@@ -36,6 +35,8 @@ namespace _Project.Scripts.PlayerStateMachine
             float movementDistance = _player.Speed * Time.deltaTime;
             Vector3 movementDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
     
+            _player.transform.forward = Vector3.Slerp(_player.transform.forward, movementDirection, Time.deltaTime * ROTATE_SPEED);
+            
             // Try to move in the desired direction ... 
             if (TryMoveInDirection(movementDirection, movementDistance)) return;
             
@@ -55,7 +56,6 @@ namespace _Project.Scripts.PlayerStateMachine
             }
     
             _player.transform.position += direction * (_player.Speed * Time.deltaTime);
-            _player.transform.forward = Vector3.Slerp(_player.transform.forward, direction, Time.deltaTime * ROTATE_SPEED);
             return true;
         }
         

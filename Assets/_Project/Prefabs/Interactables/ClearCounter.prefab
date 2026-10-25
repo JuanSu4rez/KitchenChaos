@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearCounter
   attachmentPoint: {fileID: 1383109579875130851}
-  tomatoPrefab: {fileID: 0}
+  kitchenObjectSo: {fileID: 0}
 --- !u!1001 &3878549735114914506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8489276541531669327, guid: 0004cb1e11ad014419b943c7da960724, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
