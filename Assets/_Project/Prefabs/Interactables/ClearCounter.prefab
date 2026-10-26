@@ -272,6 +272,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3916089079753513531}
   m_SourcePrefab: {fileID: 100100000, guid: 0004cb1e11ad014419b943c7da960724, type: 3}
+--- !u!1 &1188511361869012505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8489276541531669327, guid: 0004cb1e11ad014419b943c7da960724, type: 3}
+  m_PrefabInstance: {fileID: 7327788427153939798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6485319561680255484 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4589716710238282922, guid: 0004cb1e11ad014419b943c7da960724, type: 3}
@@ -290,7 +295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectedCounterVisual
   selectedCounter: {fileID: 7188290277752041200}
-  visualGameObject: {fileID: 6485319561680255484}
+  visualGameObjects:
+  - {fileID: 1188511361869012505}
 --- !u!4 &6485319561680255485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4589716710238282923, guid: 0004cb1e11ad014419b943c7da960724, type: 3}

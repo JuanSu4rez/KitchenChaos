@@ -1,11 +1,12 @@
 using System;
+using System.Linq;
 using _Project.Scripts;
 using UnityEngine;
 
 public class SelectedCounterVisual : MonoBehaviour
 {
     [SerializeField] private Interactable selectedCounter;
-    [SerializeField] private GameObject visualGameObject;
+    [SerializeField] private GameObject[] visualGameObjects;
 
     private void Start()
     {
@@ -23,13 +24,7 @@ public class SelectedCounterVisual : MonoBehaviour
         Hide();
     }
 
-    private void Show()
-    {
-        visualGameObject.SetActive(true);
-    }
+    private void Show() => visualGameObjects.ToList().ForEach(visualGameObject => visualGameObject.SetActive(true));
     
-    private void Hide()
-    {
-        visualGameObject.SetActive(false);
-    }
+    private void Hide() => visualGameObjects.ToList().ForEach(visualGameObject => visualGameObject.SetActive(false));
 }

@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 213ceec1b875a4f81b38f732e0bda579, type: 2}
     - target: {fileID: 4127295820450381757, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4127295820450381757, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4127295820450381757, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4127295820450381757, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ContainerCounterPatty
       objectReference: {fileID: 0}
+    - target: {fileID: 6987564585515104849, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aa1bacc24dde76e47b2ec0dd4e82385b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

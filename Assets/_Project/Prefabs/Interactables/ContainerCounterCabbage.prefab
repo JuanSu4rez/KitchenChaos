@@ -56,12 +56,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4440788265879044258, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+      propertyPath: selectedCounter
+      value: 
+      objectReference: {fileID: 860284869700290736}
+    - target: {fileID: 4440788265879044258, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+      propertyPath: visualGameObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440788265879044258, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+      propertyPath: 'visualGameObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7195573394293114715}
+    - target: {fileID: 4440788265879044258, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+      propertyPath: 'visualGameObjects.Array.data[1]'
+      value: 
+      objectReference: {fileID: 9124585990678833362}
+    - target: {fileID: 4440788265879044258, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+      propertyPath: 'visualGameObjects.Array.data[2]'
+      value: 
+      objectReference: {fileID: 812344164855594303}
     - target: {fileID: 5535476963265235179, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
       propertyPath: m_Name
       value: ContainerCounterCabbage
       objectReference: {fileID: 0}
+    - target: {fileID: 6987564585515104849, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e1c23b5aded59d84da30738d3267a6c9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+--- !u!1 &812344164855594303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2824197549359336913, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+  m_PrefabInstance: {fileID: 3204194603762954478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &860284869700290736 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2848472355878123614, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+  m_PrefabInstance: {fileID: 3204194603762954478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39097b2896cb48498369f40ced44c110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.ContainerCounter
+--- !u!1 &7195573394293114715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5741062457130252213, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+  m_PrefabInstance: {fileID: 3204194603762954478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9124585990678833362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5969130561571739708, guid: 934002cc4e8c51dfa9a0ae11e92957d3, type: 3}
+  m_PrefabInstance: {fileID: 3204194603762954478}
+  m_PrefabAsset: {fileID: 0}
