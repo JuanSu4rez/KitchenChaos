@@ -8,5 +8,13 @@ namespace _Project.Scripts
         {
             Debug.Log("Interactable - Interact - default implementation"); 
         }
+        
+    
+        public virtual void InteractSecondary(Player interactor)
+        {
+            Debug.Log("Interactable - InteractSecondary - default implementation"); 
+        }
+
+        
     }
 }

@@ -95,7 +95,10 @@ namespace _Project.Scripts
 
         private void SecondaryInteractionDone(object sender, EventArgs e)
         {
-            Debug.Log("Secondary interaction done");
+            if (SelectedObject != null)
+            {
+                SelectedObject.InteractSecondary(this);
+            }
         }
 
         
