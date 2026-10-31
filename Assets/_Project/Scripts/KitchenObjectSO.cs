@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Scripts
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(fileName = "KitchenObjectSO", menuName = "MY SCRIPTABLE OBJECTS/KitchenObjectSO")]
     public class KitchenObjectSO : ScriptableObject
     {
         public Transform prefab; 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 namespace _Project.Scripts
 {
@@ -6,11 +7,7 @@ namespace _Project.Scripts
     {
         
         [SerializeField] private Transform attachmentPoint;
-        [SerializeField] private KitchenObjectSO kitchenObjectSo;
-
-        private KitchenObject kitchenObject;
-
-
+        
         public override void Interact(Player interactor)
         {   
             //Interactor IS EMPTY HANDED
@@ -30,9 +27,35 @@ namespace _Project.Scripts
                 var objectFromInteractor = interactor.GetKitchenObject(); 
                 objectFromInteractor.GetComponent<KitchenObject>().SetInteractableParent(this);
             }
-            
         }
+
+        public override void InteractSecondary(Player interactor)
+        {
+            if(!IsSecondaryInteractionAllowed())
+                return;
+            
+            Chop();
+        }
+
+        private void Chop()
+        {
+            if (!_cookingStep.IsInProgress())
+            {
+                _cookingStep.Begin(100);
+                LockKitchenObject();
+            }
+
+            //TODO - THIS IS JUST FOR TESTING DONT LET THIS '20' HERE
+            _cookingStep.AddProgress(20);
+
+            if (!_cookingStep.IsCompleted())
+                return;
+
+            UnlockKitchenObject();
+        }
+       
         
+
         public Transform GetParentingPoint() => attachmentPoint;
         
         public void SetKitchenObject(KitchenObject obj) => kitchenObject = obj;

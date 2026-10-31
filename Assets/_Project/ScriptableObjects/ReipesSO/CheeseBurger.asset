@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86bea2c753aa4842868a9b8b0315e854, type: 3}
+  m_Name: CheeseBurger
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.RecipeSo
+  Name: CheeseBurger
+  sprite: {fileID: 0}
+  tasks:
+  - _ingredient: {fileID: -5459962583696143444, guid: 333acc4c1c3f0da1c9ab5e3075584409, type: 3}
+    _cookingSteps: 02000000
+  - _ingredient: {fileID: 1202618014260285563, guid: 543381ca95455d886a54610ad4ff1a5d, type: 3}
+    _cookingSteps: 01000000
+  - _ingredient: {fileID: -6191222782696237625, guid: 1cbf28ae9d4c836e3840c61b6440324a, type: 3}
+    _cookingSteps: 01000000
+  - _ingredient: {fileID: 1847336025788050139, guid: 6ca513c7fd307ced089ab6439d88ce1a, type: 3}
+    _cookingSteps: 

@@ -11,9 +11,7 @@ namespace _Project.Scripts
         [SerializeField] private Transform attachmentPoint;
         [SerializeField] private KitchenObjectSO kitchenObjectSo;
 
-        private KitchenObject kitchenObject;
-
-
+        // private KitchenObject kitchenObject;
 
         public override void Interact(Player interactor)
         {   

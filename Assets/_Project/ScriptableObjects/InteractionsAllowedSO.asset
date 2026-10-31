@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36af3a9d94b4ceab2b62f4998b956872, type: 3}
+  m_Name: InteractionsAllowedSO
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionsAllowed
+  allowedInteractions:
+  - _ingredient: {fileID: -5459962583696143444, guid: 333acc4c1c3f0da1c9ab5e3075584409, type: 3}
+    _cookingSteps: 02000000
+  - _ingredient: {fileID: 1202618014260285563, guid: 543381ca95455d886a54610ad4ff1a5d, type: 3}
+    _cookingSteps: 01000000
+  - _ingredient: {fileID: -6191222782696237625, guid: 1cbf28ae9d4c836e3840c61b6440324a, type: 3}
+    _cookingSteps: 01000000
+  - _ingredient: {fileID: 511930798342959905, guid: 62c554adee8ddae18b6f30105d2be872, type: 3}
+    _cookingSteps: 01000000

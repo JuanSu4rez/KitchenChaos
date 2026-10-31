@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97503376a7c7b3a44add97d2d73efa7f, type: 3}
   m_Name: Bread
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.KitchenObjectSO
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.KitchenObjectSo
   prefab: {fileID: 6722887764526131778, guid: 6ca513c7fd307ced089ab6439d88ce1a, type: 3}
   sprite: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22, type: 3}
   objectName: Bread

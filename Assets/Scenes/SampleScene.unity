@@ -293,9 +293,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3694947058680103889, guid: 055af5a9edc899f26bc59b151d173a48, type: 3}
+      propertyPath: _interactable
+      value: 
+      objectReference: {fileID: 1445899622}
     - target: {fileID: 4621030993299451426, guid: 055af5a9edc899f26bc59b151d173a48, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651236180100033712, guid: 055af5a9edc899f26bc59b151d173a48, type: 3}
+      propertyPath: secondaryInteraction
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8077333069762762152, guid: 055af5a9edc899f26bc59b151d173a48, type: 3}
       propertyPath: m_Name
@@ -1301,6 +1309,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39097b2896cb48498369f40ced44c110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.ContainerCounter
+--- !u!1 &1073041202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073041204}
+  - component: {fileID: 1073041205}
+  m_Layer: 0
+  m_Name: IngredientsInteractionsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1073041204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073041202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03455, y: 1.25, z: 4.15178}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073041205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073041202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89458d8ebbafd433b92c228276157378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  interactionsAllowed: {fileID: 11400000, guid: 6196ef983c7165226a08c84b5fe430fa, type: 2}
 --- !u!1 &1097993967 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5076247993361202975, guid: 055af5a9edc899f26bc59b151d173a48, type: 3}
@@ -1830,3 +1883,4 @@ SceneRoots:
   - {fileID: 1709504707}
   - {fileID: 1197947315}
   - {fileID: 250218449}
+  - {fileID: 1073041204}
