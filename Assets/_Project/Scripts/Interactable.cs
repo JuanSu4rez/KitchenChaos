@@ -10,8 +10,10 @@ namespace _Project.Scripts
         protected StepTypes secondaryInteraction;
         
         protected CookingStep _cookingStep;
-        protected InteractionsAllowed interactionsAllowed;
+        private InteractionsAllowed interactionsAllowed;
         protected KitchenObject kitchenObject;
+        protected bool kitchenObjectIsLocked;
+        
 
         // Created in Awake so observers (e.g. ProgressBarUI) can safely subscribe in their Start
         private void Awake()
@@ -37,25 +39,11 @@ namespace _Project.Scripts
         
         protected bool IsSecondaryInteractionAllowed()
         {
-            if(kitchenObject == null)
+            if (kitchenObject is not Ingredient ingredient)
                 return false;
-            
-            if(kitchenObject is not Ingredient ingredientObj)
-                return false;
-            
-            var ingredientOnCounter = ingredientObj.GetKitchenObjectSo();
-            
-            foreach (var allowedInteraction in interactionsAllowed.allowedInteractions)
-            {
-                var ingredient = allowedInteraction.GetIngredient().GetKitchenObjectSo();
-                var interactions = allowedInteraction.GetCookingSteps();
 
-                if (ingredientOnCounter != ingredient || !interactions.Contains(secondaryInteraction)) 
-                    continue;
-                
-                return true;
-            }
-            return false;
+            var requiredSteps = interactionsAllowed.GetRequiredSteps(ingredient.GetKitchenObjectSo());
+            return ingredient.IsNextStep(secondaryInteraction, requiredSteps);
         }
 
         
@@ -65,15 +53,9 @@ namespace _Project.Scripts
          */
         
         // TODO - For now, this method locks any kind of object. HOWEVER, I need to review if this locking mechanism only applies to ingredients
-        protected void LockKitchenObject()
-        {
-            
-        }
+        protected void LockKitchenObject() => kitchenObjectIsLocked = true;
 
-        protected void UnlockKitchenObject()
-        {
-            
-        }
+        protected void UnlockKitchenObject() => kitchenObjectIsLocked = false;
         
         public CookingStep GetCookingStep() => _cookingStep;
     }
