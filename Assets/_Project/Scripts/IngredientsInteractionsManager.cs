@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class IngredientsInteractionsManager : MonoBehaviour
 {
-    [SerializeField]
-    protected InteractionsAllowed interactionsAllowed;
+    [FormerlySerializedAs("interactionsAllowed")] [SerializeField]
+    protected StepPreparationAllowed stepPreparationAllowed;
     
     public static IngredientsInteractionsManager Instance { get; private set; }
 
@@ -18,6 +19,6 @@ public class IngredientsInteractionsManager : MonoBehaviour
         Instance = this;
     }
 
-    public InteractionsAllowed GetInteractionsAllowed() => interactionsAllowed;
+    public StepPreparationAllowed GetInteractionsAllowed() => stepPreparationAllowed;
 
 }

@@ -3,7 +3,7 @@ using System;
 namespace _Project.Scripts
 {
     [Serializable]
-    public enum StepTypes
+    public enum PreparationSteps
     {
         Boil,
         Chop,

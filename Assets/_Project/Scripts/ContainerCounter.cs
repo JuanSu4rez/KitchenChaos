@@ -6,18 +6,21 @@ namespace _Project.Scripts
     {
         [SerializeField] private KitchenObjectSO kitchenObjectSo;
 
-        // private KitchenObject kitchenObject;
+        private KitchenObject kitchenObject;
 
         public override void Interact(Player interactor)
         {
+            Debug.Log("ContainerCounter Interact called");
+            
             //INTERACTOR IS EMPTY HANDED AND THERE IS NO OBJECT ON THIS COUNTER -> SPAWN A NEW ONE
             if (!interactor.HasAnObject() && !HasAnObject())
             {
                 Transform kitchenObjectTransform = Instantiate(kitchenObjectSo.prefab, GetParentingPoint());
                 kitchenObjectTransform.GetComponent<KitchenObject>().SetInteractableParent(this);
             }
-
-            TransferKitchenObject(interactor);
+        
+            base.TransferKitchenObject(interactor);
         }
+        
     }
 }

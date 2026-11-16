@@ -8,9 +8,9 @@ namespace _Project.Scripts
     public class ClearCounter : BaseCounter
     {
         [SerializeField] private KitchenObjectSO kitchenObjectSo;
-
-        // private KitchenObject kitchenObject;
-
-        public override void Interact(Player interactor) => TransferKitchenObject(interactor);
+        public override void Interact(Player interactor)
+        {
+            base.TransferKitchenObject(interactor);
+        }
     }
 }

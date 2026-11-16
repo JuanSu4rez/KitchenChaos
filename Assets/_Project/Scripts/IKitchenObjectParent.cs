@@ -13,7 +13,6 @@ namespace _Project.Scripts
 
         public void SetKitchenObject(KitchenObject kitchenObject);
         
-        
         public void ClearKitchenObject();
 
         public Transform GetParentingPoint();

@@ -11,12 +11,12 @@ namespace _Project.Scripts
         
         public override void EnterState()
         {
-            Debug.Log("Interacting State Entered");
+            // Debug.Log("Interacting State Entered");
         }
 
         public override void Update()
         {
-            Debug.Log("Interacting State Updated");
+            // Debug.Log("Interacting State Updated");
         }
     }
 }

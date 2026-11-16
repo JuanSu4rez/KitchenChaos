@@ -14,7 +14,7 @@ namespace _Project.Scripts
 
         public class OnSelectedInteractableChangedEventArgs : EventArgs
         {
-            public Interactable SelectedInteractable;
+            public IInteractable SelectedInteractable;
         }
         
         
@@ -26,7 +26,7 @@ namespace _Project.Scripts
         
         
         private Vector3 _lastInteractDirection;
-        public Interactable SelectedObject { get; set; }
+        public IInteractable SelectedObject { get; set; }
         public Transform HeldObject { get; set; }
         
         public float Speed => speed;
@@ -70,8 +70,7 @@ namespace _Project.Scripts
         private void Update()
         {
             _currentState.Update();
-            
-            CheckIfPlayerCanInteract();
+            PlayerInteractionDetector.UpdateSelection(this);
         }
 
         public void TransitToState(IPlayerBaseState newState)
@@ -84,61 +83,37 @@ namespace _Project.Scripts
             _currentState = newState;
             _currentState.EnterState();
         }
+
+        public void SetLastInteractDirection(Vector3 direction) => _lastInteractDirection = direction;
+
+        public Vector3 GetLastInteractDirection() => _lastInteractDirection;
+
+        public void NotifySelectedInteractableChanged(IInteractable interactable)
+        {
+            OnInteractableFaced?.Invoke(this, new OnSelectedInteractableChangedEventArgs
+            {
+                SelectedInteractable = interactable
+            });
+        }
         
         private void PrimaryInteractionPerformed(object sender, EventArgs e)
         {
+            Debug.Log("Primary interaction performed");
             if (SelectedObject != null)
             {
+                Debug.Log("Selected object is not null");
                 SelectedObject.Interact(this);
             }
         }
 
         private void SecondaryInteractionDone(object sender, EventArgs e)
         {
-            if (SelectedObject != null)
+            if (SelectedObject is IAlternateInteractable alternateInteractable)
             {
-                SelectedObject.InteractSecondary(this);
+                alternateInteractable.AlternateInteract(this);
             }
         }
-
         
-        // Check if the player can interact with an object in their line of sight.
-        private void CheckIfPlayerCanInteract()
-        {
-            Vector2 inputVector = GameInput.GetMovementVectorNormalized();
-            Vector3 movementDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
-
-            if (movementDirection != Vector3.zero)
-            {
-                _lastInteractDirection = movementDirection;
-            }
-
-            var interactionDistance = 1.5f;
-            if (Physics.Raycast(transform.position, _lastInteractDirection, out RaycastHit hit, interactionDistance))
-            {
-                if(hit.transform.TryGetComponent(out Interactable interactable))
-                {
-                    SetSelectedInteractable(interactable);
-                    return;
-                }
-            }
-            SetSelectedInteractable(null);
-        }
-
-        private void SetSelectedInteractable(Interactable interactable)
-        {
-            if (SelectedObject == interactable)
-            {
-                return;
-            }
-
-            SelectedObject = interactable;
-            OnInteractableFaced?.Invoke(this, new OnSelectedInteractableChangedEventArgs
-            {
-                SelectedInteractable = interactable
-            });
-        }
-
         public void Interact(Player interactor)
         {
             

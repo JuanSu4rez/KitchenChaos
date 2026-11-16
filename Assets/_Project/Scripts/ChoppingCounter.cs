@@ -1,43 +1,24 @@
 using UnityEngine;
-using System.Linq;
 
 namespace _Project.Scripts
 {
-    public class ChoppingCounter : BaseCounter
+    public class ChoppingCounter : BaseCounter, IAlternateInteractable
     {
+        [SerializeField] private float workPerChop = 1f;
+
         public override void Interact(Player interactor)
         {
-            if (kitchenObjectIsLocked)
+            // Station rule: an ingredient can't be removed until chopping is finished
+            if (GetKitchenObject() is Ingredient ingredient && ingredient.IsStepInProgress(PreparationSteps.Chop))
                 return;
 
             TransferKitchenObject(interactor);
         }
 
-        public override void InteractSecondary(Player interactor)
+        public void AlternateInteract(Player interactor)
         {
-            if(!IsSecondaryInteractionAllowed())
-                return;
-            
-            Chop();
-        }
-
-        private void Chop()
-        {
-            if (!_cookingStep.IsInProgress())
-            {
-                //TODO - THIS IS JUST FOR TESTING DONT LET THIS '100' HERE
-                _cookingStep.Begin(100);
-                LockKitchenObject();
-            }
-
-            //TODO - THIS IS JUST FOR TESTING DONT LET THIS '20' HERE
-            _cookingStep.AddProgress(15);
-
-            if (!_cookingStep.IsCompleted())
-                return;
-
-            UnlockKitchenObject();
-            kitchenObject.GetComponent<Ingredient>().AddStepCompleted(StepTypes.Chop);
+            if (GetKitchenObject() is Ingredient ingredient)
+                ingredient.ApplyWork(PreparationSteps.Chop, workPerChop);
         }
     }
 }

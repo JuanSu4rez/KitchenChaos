@@ -1,45 +1,45 @@
-using System;
-using System.Net.Mime;
 using _Project.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Displays the progress of the IHasProgress it belongs to. Place it inside the prefab that owns
+// the progress (e.g. the ingredient), so the bar travels with it from counter to hand to stove.
 public class ProgressBarUI : MonoBehaviour
 {
-    [SerializeField] private Interactable _interactable;
+    [Tooltip("Optional. If empty, the nearest IHasProgress in the parents is used.")]
+    [SerializeField] private GameObject progressSourceObject;
     [SerializeField] private Image barImage;
+
+    private IHasProgress _progressSource;
 
     private void Start()
     {
-        _interactable.GetCookingStep().OnProgressChanged += OnProgressChanged;
-        barImage.fillAmount = 0;
-        Hide();
+        _progressSource = progressSourceObject != null
+            ? progressSourceObject.GetComponent<IHasProgress>()
+            : GetComponentInParent<IHasProgress>();
+
+        if (_progressSource == null)
+        {
+            Debug.LogWarning($"{nameof(ProgressBarUI)} on '{name}' has no IHasProgress source", this);
+            gameObject.SetActive(false);
+            return;
+        }
+
+        _progressSource.OnProgressChanged += OnProgressChanged;
+        UpdateBar(_progressSource.ProgressNormalized);
     }
 
     private void OnDestroy()
     {
-        _interactable.GetCookingStep().OnProgressChanged -= OnProgressChanged;
+        if (_progressSource != null)
+            _progressSource.OnProgressChanged -= OnProgressChanged;
     }
 
-    private void OnProgressChanged(object sender, CookingStep.OnProgressChangedEventArgs e)
-    {
-        barImage.fillAmount = e.progressNormalized;
-        if (e.progressNormalized <= 0f || e.progressNormalized >= 1f)
-        {
-            Hide();
-            return;
-        }
-        
-        Show();
-    }
+    private void OnProgressChanged(object sender, ProgressChangedEventArgs e) => UpdateBar(e.progressNormalized);
 
-    private void Show()
+    private void UpdateBar(float progressNormalized)
     {
-        gameObject.SetActive(true);
-    }
-
-    private void Hide()
-    {
-        gameObject.SetActive(false);
+        barImage.fillAmount = progressNormalized;
+        gameObject.SetActive(progressNormalized > 0f && progressNormalized < 1f);
     }
 }

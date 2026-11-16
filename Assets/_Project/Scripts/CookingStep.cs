@@ -1,81 +1,26 @@
-using System;
 using UnityEngine;
 
 namespace _Project.Scripts
 {
-    [System.Serializable]
+    // Progress of a single preparation step. Owned by the Ingredient being prepared,
+    // so it travels with the food (e.g. a pan moved between stoves keeps its progress).
     public class CookingStep
     {
-        
-        public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
-        public event EventHandler OnStepStarted;
-        public event EventHandler OnStepCompleted;
-        public class OnProgressChangedEventArgs: EventArgs
-        {
-            public float progressNormalized;
-        }
-        
-        [SerializeField]
-        private StepTypes _stepType;
-        [SerializeField]
-        private int _totalEffort;
-        private int _progress;
-        private bool _isCompleted;
-        private bool _isInProgress;
+        private readonly float _totalEffort;
+        private float _progress;
 
-        public CookingStep() { } // kept for Unity deserialization
-        public CookingStep(StepTypes stepType, int totalEffort)
+        public CookingStep(PreparationSteps step, float totalEffort)
         {
-            _stepType = stepType;
-            _totalEffort = totalEffort;
+            Step = step;
+            _totalEffort = Mathf.Max(0.01f, totalEffort);
         }
 
-        // Resets this step so the same instance (and its subscribers) can be reused for the next task
-        public void Begin(int totalEffort)
-        {
-            _totalEffort = Mathf.Max(1, totalEffort);
-            _progress = 0;
-            _isCompleted = false;
-            _isInProgress = true;
+        public PreparationSteps Step { get; }
 
-            OnStepStarted?.Invoke(this, EventArgs.Empty);
-            RaiseProgressChanged();
-        }
+        public float ProgressNormalized => _progress / _totalEffort;
 
-        public void AddProgress(int newProgress)
-        {
-            if (!_isInProgress)
-                return;
+        public bool IsCompleted() => _progress >= _totalEffort;
 
-            _progress = Mathf.Min(_progress + newProgress, _totalEffort);
-            RaiseProgressChanged();
-
-            if (_progress < _totalEffort)
-                return;
-
-            _isCompleted = true;
-            _isInProgress = false;
-            OnStepCompleted?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void RaiseProgressChanged()
-        {
-            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
-                {
-                    progressNormalized = _progress / (float)_totalEffort
-                }
-            );
-        }
-
-        public bool IsCompleted() => _isCompleted;
-
-        public bool IsInProgress() => _isInProgress;
-
-        public int GetTotalEffort() => _totalEffort;
-
-        public int GetProgress() => _progress;
-        
+        public void AddProgress(float amount) => _progress = Mathf.Min(_progress + amount, _totalEffort);
     }
-
-    
 }

@@ -11,10 +11,10 @@ namespace _Project.Scripts
         private Ingredient _ingredient;
         
         [SerializeField]
-        private List<StepTypes> _cookingSteps;
+        private List<PreparationSteps> _cookingSteps;
         
         public Ingredient GetIngredient() => _ingredient;
         
-        public List<StepTypes> GetCookingSteps() => _cookingSteps;
+        public List<PreparationSteps> GetCookingSteps() => _cookingSteps;
     }
 }

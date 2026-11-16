@@ -13,7 +13,7 @@ namespace _Project.Scripts.PlayerStateMachine
         
         public override void EnterState()
         {
-            Debug.Log("Running State Entered");
+            // Debug.Log("Running State Entered");
         }
 
 
@@ -44,8 +44,10 @@ namespace _Project.Scripts.PlayerStateMachine
             if (TryMoveInDirection(new Vector3(inputVector.x, 0, 0).normalized, movementDistance)) return;
             
             // ... if that fails, try to move in the z direction only ...
-            if (TryMoveInDirection(new Vector3(0, 0, inputVector.y).normalized, movementDistance)) ;
-            
+            if (TryMoveInDirection(new Vector3(0, 0, inputVector.y).normalized, movementDistance))
+            {
+                return;
+            }
         }
 
         private bool TryMoveInDirection(Vector3 direction, float distance)

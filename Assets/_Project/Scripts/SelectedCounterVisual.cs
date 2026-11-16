@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class SelectedCounterVisual : MonoBehaviour
 {
-    [SerializeField] private Interactable selectedCounter;
+    [SerializeField] private BaseCounter selectedCounter;
     [SerializeField] private GameObject[] visualGameObjects;
 
     private void Start()
     {
         Player.Instance.OnInteractableFaced += Player_On;
-        Hide();
+        // Hide();
     }
 
     private void Player_On(object sender, Player.OnSelectedInteractableChangedEventArgs e)
