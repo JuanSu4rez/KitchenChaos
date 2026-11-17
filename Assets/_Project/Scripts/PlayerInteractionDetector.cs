@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace _Project.Scripts
 {
-    public static class PlayerInteractionDetector
+    internal static class PlayerInteractionDetector
     {
-        public static void UpdateSelection(Player player)
+        internal static void UpdateSelection(Player player)
         {
             if (player == null)
             {

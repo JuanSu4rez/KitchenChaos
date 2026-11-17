@@ -7,9 +7,9 @@ namespace _Project.Scripts
     public class GameInput : MonoBehaviour
     {
         private PlayerInputActions playerInputActions;
-        public event EventHandler OnPrimaryInteraction;
-        public event EventHandler OnSecondaryInteraction;
-        
+        internal event EventHandler OnPrimaryInteraction;
+        internal event EventHandler OnSecondaryInteraction;
+
         private void Awake()
         {
             playerInputActions = new PlayerInputActions();
@@ -19,24 +19,28 @@ namespace _Project.Scripts
             playerInputActions.Player.SecondaryInteraction.performed += SecondaryInteractionDone;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            var inputVector = GetMovementVectorNormalized();
+            if (playerInputActions == null)
+                return;
+
+            playerInputActions.Player.PrimaryInteraction.performed -= PrimaryInteractionDone;
+            playerInputActions.Player.SecondaryInteraction.performed -= SecondaryInteractionDone;
+            playerInputActions.Dispose();
         }
 
-        public Vector2 GetMovementVectorNormalized()
+        internal Vector2 GetMovementVectorNormalized()
         {
             Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
-            inputVector = inputVector.normalized;
-            return inputVector;
+            return inputVector.normalized;
         }
 
-        public void PrimaryInteractionDone(InputAction.CallbackContext callbackContext)
+        private void PrimaryInteractionDone(InputAction.CallbackContext callbackContext)
         {
             OnPrimaryInteraction?.Invoke(this, EventArgs.Empty);
         }
         
-        public void SecondaryInteractionDone(InputAction.CallbackContext callbackContext)
+        private void SecondaryInteractionDone(InputAction.CallbackContext callbackContext)
         {
             OnSecondaryInteraction?.Invoke(this, EventArgs.Empty);
         }

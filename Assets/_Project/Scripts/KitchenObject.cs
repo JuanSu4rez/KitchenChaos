@@ -5,15 +5,15 @@ namespace _Project.Scripts
     public class KitchenObject : MonoBehaviour
     {
         [SerializeField] 
-        protected KitchenObjectSO KitchenObjectSo;
+        private KitchenObjectSO KitchenObjectSo;
         
         //The parent object where the kitchenObject is located
         private IKitchenObjectParent _interactableParent;
         
         
-        public KitchenObjectSO GetKitchenObjectSo() => KitchenObjectSo;
+        internal KitchenObjectSO GetKitchenObjectSo() => KitchenObjectSo;
         
-        public void SetInteractableParent(IKitchenObjectParent interactable)
+        internal void SetInteractableParent(IKitchenObjectParent interactable)
         {
             if (interactable.HasAnObject())
             {

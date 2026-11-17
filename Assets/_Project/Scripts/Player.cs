@@ -7,14 +7,14 @@ namespace _Project.Scripts
     public class Player : MonoBehaviour, IKitchenObjectParent
     {
         
-        public static Player Instance { get; private set; }
+        internal static Player Instance { get; private set; }
         
         // Events
-        public event EventHandler<OnSelectedInteractableChangedEventArgs> OnInteractableFaced;
+        internal event EventHandler<OnSelectedInteractableChangedEventArgs> OnInteractableFaced;
 
-        public class OnSelectedInteractableChangedEventArgs : EventArgs
+        internal class OnSelectedInteractableChangedEventArgs : EventArgs
         {
-            public IInteractable SelectedInteractable;
+            internal IInteractable SelectedInteractable;
         }
         
         
@@ -26,23 +26,19 @@ namespace _Project.Scripts
         
         
         private Vector3 _lastInteractDirection;
-        public IInteractable SelectedObject { get; set; }
-        public Transform HeldObject { get; set; }
+        internal IInteractable SelectedObject { get; set; }
         
-        public float Speed => speed;
-        public GameInput GameInput => gameInput;
+        internal float Speed => speed;
+        internal GameInput GameInput => gameInput;
         
         // PlayerStates
         
         private IPlayerBaseState _currentState;
-        public IdleState IdleState;
-        public WalkingState WalkingState;
-        public InteractingState InteractingState;
+        internal IdleState IdleState;
+        internal WalkingState WalkingState;
         
         
-        public bool IsWalking => _currentState == WalkingState;
-        public bool IsIdle => _currentState == IdleState;
-        public bool IsInteracting => _currentState == InteractingState;
+        internal bool IsWalking => _currentState == WalkingState;
 
         private void Awake()
         {
@@ -54,7 +50,6 @@ namespace _Project.Scripts
             Instance = this;
             IdleState = new IdleState(this);
             WalkingState = new WalkingState(this);
-            InteractingState = new InteractingState(this);
         }
 
         private void Start()
@@ -67,13 +62,22 @@ namespace _Project.Scripts
             GameInput.OnSecondaryInteraction += SecondaryInteractionDone;
         }
 
+        private void OnDestroy()
+        {
+            if (gameInput == null)
+                return;
+
+            gameInput.OnPrimaryInteraction -= PrimaryInteractionPerformed;
+            gameInput.OnSecondaryInteraction -= SecondaryInteractionDone;
+        }
+
         private void Update()
         {
             _currentState.Update();
             PlayerInteractionDetector.UpdateSelection(this);
         }
 
-        public void TransitToState(IPlayerBaseState newState)
+        internal void TransitToState(IPlayerBaseState newState)
         {
             if (_currentState == newState)
             {
@@ -84,11 +88,11 @@ namespace _Project.Scripts
             _currentState.EnterState();
         }
 
-        public void SetLastInteractDirection(Vector3 direction) => _lastInteractDirection = direction;
+        internal void SetLastInteractDirection(Vector3 direction) => _lastInteractDirection = direction;
 
-        public Vector3 GetLastInteractDirection() => _lastInteractDirection;
+        internal Vector3 GetLastInteractDirection() => _lastInteractDirection;
 
-        public void NotifySelectedInteractableChanged(IInteractable interactable)
+        internal void NotifySelectedInteractableChanged(IInteractable interactable)
         {
             OnInteractableFaced?.Invoke(this, new OnSelectedInteractableChangedEventArgs
             {
@@ -98,10 +102,8 @@ namespace _Project.Scripts
         
         private void PrimaryInteractionPerformed(object sender, EventArgs e)
         {
-            Debug.Log("Primary interaction performed");
             if (SelectedObject != null)
             {
-                Debug.Log("Selected object is not null");
                 SelectedObject.Interact(this);
             }
         }
@@ -114,11 +116,6 @@ namespace _Project.Scripts
             }
         }
         
-        public void Interact(Player interactor)
-        {
-            
-        }
-
         public Transform GetParentingPoint() => attachmentPoint;
 
         public void SetKitchenObject(KitchenObject obj) => kitchenObject = obj;

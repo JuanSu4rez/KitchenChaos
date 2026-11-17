@@ -2,18 +2,13 @@ using UnityEngine;
 
 namespace _Project.Scripts.PlayerStateMachine
 {
-    public class IdleState : IPlayerBaseState
+    internal sealed class IdleState : IPlayerBaseState
     {
-        private Player _player;
+        private readonly Player _player;
         
-        public IdleState(Player player) => _player = player;
+        internal IdleState(Player player) => _player = player;
         
-        public override void EnterState()
-        {
-            // Debug.Log("Idle State Entered");
-        }
-
-        public override void Update()
+        internal override void Update()
         {
             Vector2 inputVector = _player.GameInput.GetMovementVectorNormalized();
 

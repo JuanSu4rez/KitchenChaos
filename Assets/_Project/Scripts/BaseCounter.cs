@@ -9,7 +9,7 @@ namespace _Project.Scripts
         [SerializeField] private KitchenObject kitchenObject;
 
         // Default pick-up / drop behaviour between the interactor and this counter
-        public void TransferKitchenObject(Player interactor)
+        protected void TransferKitchenObject(Player interactor)
         {
             if (!interactor.HasAnObject())
             {

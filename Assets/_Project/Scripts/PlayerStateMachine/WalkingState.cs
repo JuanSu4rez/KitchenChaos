@@ -2,22 +2,16 @@ using UnityEngine;
 
 namespace _Project.Scripts.PlayerStateMachine
 {
-    public class WalkingState : IPlayerBaseState
+    internal sealed class WalkingState : IPlayerBaseState
     {
         private const float ROTATE_SPEED = 10f;
         private const float PLAYER_CAPSULE_COLLIDER_RADIUS = .7f;
         private const float PLAYER_CAPSULE_COLLIDER_HEIGHT = 2f;
-        private Player _player;
+        private readonly Player _player;
         
-        public WalkingState(Player player) => _player = player;
+        internal WalkingState(Player player) => _player = player;
         
-        public override void EnterState()
-        {
-            // Debug.Log("Running State Entered");
-        }
-
-
-        public override void Update()
+        internal override void Update()
         {
             Vector2 inputVector = _player.GameInput.GetMovementVectorNormalized();
     
@@ -57,7 +51,7 @@ namespace _Project.Scripts.PlayerStateMachine
                 return false;
             }
     
-            _player.transform.position += direction * (_player.Speed * Time.deltaTime);
+            _player.transform.position += direction * distance;
             return true;
         }
         

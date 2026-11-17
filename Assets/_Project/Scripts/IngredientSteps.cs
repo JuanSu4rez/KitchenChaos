@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts
 {
@@ -13,8 +12,8 @@ namespace _Project.Scripts
         [SerializeField]
         private List<PreparationSteps> _cookingSteps;
         
-        public Ingredient GetIngredient() => _ingredient;
+        internal Ingredient GetIngredient() => _ingredient;
         
-        public List<PreparationSteps> GetCookingSteps() => _cookingSteps;
+        internal List<PreparationSteps> GetCookingSteps() => _cookingSteps;
     }
 }

@@ -5,10 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewScriptableObjectScript", menuName = "Scriptable Objects/NewScriptableObjectScript")]
 public class StepPreparationAllowed : ScriptableObject
 {
-    [SerializeField]
-    public List<IngredientSteps> allowedInteractions;
+    [SerializeField] private List<IngredientSteps> allowedInteractions;
     
-    public List<PreparationSteps> GetRequiredSteps(KitchenObjectSO ingredient)
+    internal List<PreparationSteps> GetRequiredSteps(KitchenObjectSO ingredient)
     {
         var entry = allowedInteractions.Find(i => i.GetIngredient().GetKitchenObjectSo() == ingredient);
         return entry != null ? entry.GetCookingSteps() : new List<PreparationSteps>();

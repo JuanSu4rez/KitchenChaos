@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using _Project.Scripts;
 using UnityEngine;
 
@@ -11,12 +9,17 @@ public class SelectedCounterVisual : MonoBehaviour
     private void Start()
     {
         Player.Instance.OnInteractableFaced += Player_On;
-        // Hide();
+    }
+
+    private void OnDestroy()
+    {
+        if (Player.Instance != null)
+            Player.Instance.OnInteractableFaced -= Player_On;
     }
 
     private void Player_On(object sender, Player.OnSelectedInteractableChangedEventArgs e)
     {
-        if (e.SelectedInteractable == selectedCounter)
+        if (e.SelectedInteractable is BaseCounter counter && counter == selectedCounter)
         {
             Show();
             return;
@@ -24,7 +27,13 @@ public class SelectedCounterVisual : MonoBehaviour
         Hide();
     }
 
-    private void Show() => visualGameObjects.ToList().ForEach(visualGameObject => visualGameObject.SetActive(true));
+    private void Show() => SetVisualsActive(true);
     
-    private void Hide() => visualGameObjects.ToList().ForEach(visualGameObject => visualGameObject.SetActive(false));
+    private void Hide() => SetVisualsActive(false);
+
+    private void SetVisualsActive(bool active)
+    {
+        foreach (var visualGameObject in visualGameObjects)
+            visualGameObject.SetActive(active);
+    }
 }

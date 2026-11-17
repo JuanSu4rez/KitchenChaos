@@ -20,16 +20,14 @@ namespace _Project.Scripts
         [SerializeField] private List<StepEffort> stepEfforts = new();
 
         private readonly List<PreparationSteps> _completedSteps = new();
-        private CookingStep _currentStep; // null when no step is in progress
+        private CookingStep _currentStep;
 
         public float ProgressNormalized => _currentStep?.ProgressNormalized ?? 0f;
 
-        public bool IsStepInProgress() => _currentStep != null;
-
-        public bool IsStepInProgress(PreparationSteps step) => _currentStep != null && _currentStep.Step == step;
+        internal bool IsStepInProgress(PreparationSteps step) => _currentStep != null && _currentStep.Step == step;
 
         // Applies work from a station. Returns false if this step can't be done on this ingredient right now.
-        public bool ApplyWork(PreparationSteps step, float amount)
+        internal bool ApplyWork(PreparationSteps step, float amount)
         {
             if (!IsNextStep(step))
                 return false;
@@ -46,13 +44,11 @@ namespace _Project.Scripts
             return true;
         }
 
-        public bool IsNextStep(PreparationSteps step)
+        private bool IsNextStep(PreparationSteps step)
         {
             var requiredSteps = GetRequiredSteps();
             return _completedSteps.Count < requiredSteps.Count && requiredSteps[_completedSteps.Count] == step;
         }
-
-        public bool IsReady() => _completedSteps.Count >= GetRequiredSteps().Count;
 
         private List<PreparationSteps> GetRequiredSteps()
         {

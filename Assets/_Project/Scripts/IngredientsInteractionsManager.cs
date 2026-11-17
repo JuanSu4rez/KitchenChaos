@@ -4,9 +4,9 @@ using UnityEngine.Serialization;
 public class IngredientsInteractionsManager : MonoBehaviour
 {
     [FormerlySerializedAs("interactionsAllowed")] [SerializeField]
-    protected StepPreparationAllowed stepPreparationAllowed;
+    private StepPreparationAllowed stepPreparationAllowed;
     
-    public static IngredientsInteractionsManager Instance { get; private set; }
+    internal static IngredientsInteractionsManager Instance { get; private set; }
 
 
     private void Awake()
@@ -19,6 +19,6 @@ public class IngredientsInteractionsManager : MonoBehaviour
         Instance = this;
     }
 
-    public StepPreparationAllowed GetInteractionsAllowed() => stepPreparationAllowed;
+    internal StepPreparationAllowed GetInteractionsAllowed() => stepPreparationAllowed;
 
 }
