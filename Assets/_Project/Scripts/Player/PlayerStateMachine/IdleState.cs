@@ -10,7 +10,7 @@ namespace _Project.Scripts.PlayerStateMachine
         
         public override void EnterState()
         {
-            // Debug.Log("Idle State Entered");
+            
         }
 
         public override void Update()

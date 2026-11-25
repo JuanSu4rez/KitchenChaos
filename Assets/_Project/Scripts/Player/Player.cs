@@ -98,10 +98,9 @@ namespace _Project.Scripts
         
         private void PrimaryInteractionPerformed(object sender, EventArgs e)
         {
-            Debug.Log("Primary interaction performed");
             if (SelectedObject != null)
             {
-                Debug.Log("Selected object is not null");
+                
                 SelectedObject.Interact(this);
             }
         }

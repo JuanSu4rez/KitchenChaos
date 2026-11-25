@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6722887764526131778}
   - component: {fileID: 1202618014260285563}
   m_Layer: 0
-  m_Name: TomatoChopped
+  m_Name: Tomato_Chopped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8ce79d9d4343b4bbb5a70b4ba5443c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Ingredient
-  KitchenObjectSo: {fileID: 0}
+  KitchenObjectSo: {fileID: 11400000, guid: e31eb5a3ce6742e818b67e1019458a41, type: 2}
+  _ingredientState: 0
 --- !u!1001 &8866866440493573764
 PrefabInstance:
   m_ObjectHideFlags: 0

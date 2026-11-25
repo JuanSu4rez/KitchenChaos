@@ -10,16 +10,13 @@ namespace _Project.Scripts
 
         public override void Interact(Player interactor)
         {
-            Debug.Log("ContainerCounter Interact called");
-            
-            //INTERACTOR IS EMPTY HANDED AND THERE IS NO OBJECT ON THIS COUNTER -> SPAWN A NEW ONE
             if (!interactor.HasAnObject() && !HasAnObject())
             {
                 Transform kitchenObjectTransform = Instantiate(kitchenObjectSo.prefab, GetParentingPoint());
                 kitchenObjectTransform.GetComponent<KitchenObject>().SetInteractableParent(this);
             }
         
-            base.TransferKitchenObject(interactor);
+            TransferKitchenObject(interactor);
         }
         
     }

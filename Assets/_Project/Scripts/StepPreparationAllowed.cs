@@ -6,12 +6,7 @@ using UnityEngine;
 public class StepPreparationAllowed : ScriptableObject
 {
     [SerializeField]
-    public List<IngredientSteps> allowedInteractions;
+    public List<IngredientPreparationSteps> allowedInteractions;
     
-    public List<PreparationSteps> GetRequiredSteps(KitchenObjectSO ingredient)
-    {
-        var entry = allowedInteractions.Find(i => i.GetIngredient().GetKitchenObjectSo() == ingredient);
-        return entry != null ? entry.GetCookingSteps() : new List<PreparationSteps>();
-    }
 }
  

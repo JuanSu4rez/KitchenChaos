@@ -17,7 +17,6 @@ namespace _Project.Scripts
         {
             if (interactable.HasAnObject())
             {
-                Debug.Log("Interactable is not available");
                 return;
             }
             

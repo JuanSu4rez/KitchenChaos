@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Ingredient
   KitchenObjectSo: {fileID: 11400000, guid: 213ceec1b875a4f81b38f732e0bda579, type: 2}
+  _ingredientState: 0
 --- !u!1001 &999891695647613502
 PrefabInstance:
   m_ObjectHideFlags: 0

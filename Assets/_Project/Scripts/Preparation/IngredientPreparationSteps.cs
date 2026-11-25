@@ -5,16 +5,16 @@ using UnityEngine.Serialization;
 namespace _Project.Scripts
 {
     [System.Serializable]
-    public class IngredientSteps
+    public class IngredientPreparationSteps
     {
         [SerializeField]
         private Ingredient _ingredient;
         
         [SerializeField]
-        private List<PreparationSteps> _cookingSteps;
+        private List<CookingStepTypes> _cookingSteps;
         
         public Ingredient GetIngredient() => _ingredient;
         
-        public List<PreparationSteps> GetCookingSteps() => _cookingSteps;
+        public List<CookingStepTypes> GetCookingSteps() => _cookingSteps;
     }
 }

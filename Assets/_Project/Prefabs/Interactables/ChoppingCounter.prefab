@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ad1e3f528e419fa15fc7433d46012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressBarUI
-  _interactable: {fileID: 7651236180100033712}
+  progressSourceObject: {fileID: 8077333069762762152}
   barImage: {fileID: 5658170867695457987}
 --- !u!1 &7998266472701835617
 GameObject:
@@ -348,19 +348,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4455204255421222228, guid: c66d413b808d94dbeb0dc5b88afe6c09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 274609342559220928}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5207005578116643330, guid: c66d413b808d94dbeb0dc5b88afe6c09, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7651236180100033712}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c66d413b808d94dbeb0dc5b88afe6c09, type: 3}
 --- !u!4 &400430003811508990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4455204255421222228, guid: c66d413b808d94dbeb0dc5b88afe6c09, type: 3}
-  m_PrefabInstance: {fileID: 4060712348856823722}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3128671917565981257 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1383109579875130851, guid: c66d413b808d94dbeb0dc5b88afe6c09, type: 3}
   m_PrefabInstance: {fileID: 4060712348856823722}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8077333069762762152 stripped
@@ -368,20 +360,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5207005578116643330, guid: c66d413b808d94dbeb0dc5b88afe6c09, type: 3}
   m_PrefabInstance: {fileID: 4060712348856823722}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7651236180100033712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8077333069762762152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179ce3a0de03489c8ba6547c330ed7c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.ChoppingCounter
-  secondaryInteraction: 0
-  attachmentPoint: {fileID: 3128671917565981257}
 --- !u!1001 &8648875158311009383
 PrefabInstance:
   m_ObjectHideFlags: 0
