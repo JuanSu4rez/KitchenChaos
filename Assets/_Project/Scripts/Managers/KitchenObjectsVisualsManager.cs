@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using _Project.Scripts;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class KitchenObjectsVisualsManager : MonoBehaviour
@@ -17,10 +18,11 @@ public class KitchenObjectsVisualsManager : MonoBehaviour
         Instance = this;
     }
 
+    [CanBeNull]
     public Transform GetIngredientNewVisual(Ingredient ingredient, CookingStepTypes stepType)
     {
         var outputPrefabIngredient = ingredientPreparationVisualsList
-            .Find( SO => SO.ingredientInput == ingredient.GetKitchenObjectSo().prefab && SO.stepType == stepType).ingredientOutput;
+            .Find( SO => SO.ingredientInput == ingredient.GetKitchenObjectSo().prefab && SO.stepType == stepType)?.ingredientOutput;
         return outputPrefabIngredient;
     }
 }

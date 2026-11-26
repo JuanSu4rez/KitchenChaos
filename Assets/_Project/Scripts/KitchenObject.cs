@@ -32,5 +32,10 @@ namespace _Project.Scripts
             transform.parent = _interactableParent.GetParentingPoint();
             transform.localPosition = Vector3.zero;
         }
+        
+        public void DestroySelf() {
+            _interactableParent.ClearKitchenObject();
+            Destroy(gameObject);
+        }
     }
 }

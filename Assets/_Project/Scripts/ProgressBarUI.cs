@@ -12,7 +12,7 @@ public class ProgressBarUI : MonoBehaviour
     
     private void Start()
     {
-        var _progressSource = progressSourceObject.GetComponent<FoodProcessingObject>().GetCookingTask();
+        _progressSource = progressSourceObject?.GetComponent<FoodProcessingObject>().GetCookingTask();
         _progressSource.OnProgressChanged += OnProgressChanged;
         UpdateBar(_progressSource.ProgressNormalized);
     }

@@ -26,8 +26,10 @@ public class IngredientsInteractionsManager : MonoBehaviour
     
     public static List<CookingStepTypes> GetIngredientPreparationSteps(Ingredient ingredient)
     {
+        Debug.Log("1111");
         var ingredientPreparationStepsList = Instance.GetPreparationSteps().allowedInteractions.FindAll(i => i.GetIngredient().GetKitchenObjectSo() == ingredient.GetKitchenObjectSo());
         var result = ingredientPreparationStepsList.ToList().Find(i => i.GetIngredient().GetKitchenObjectSo() == ingredient.GetKitchenObjectSo());;
+        Debug.Log("22222222222");
         return result != null ? result.GetCookingSteps() : new List<CookingStepTypes>();
     }
     

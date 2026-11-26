@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6722887764526131778}
   - component: {fileID: -6191222782696237625}
+  - component: {fileID: 2498351074464747828}
   m_Layer: 0
   m_Name: Cheese
   m_TagString: Untagged
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Ingredient
   KitchenObjectSo: {fileID: 11400000, guid: 3eed2dbc8dd3788eca4739d60a61e75e, type: 2}
   _ingredientState: 0
+--- !u!114 &2498351074464747828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884039267752426967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba892d3d0a94dd78d5a40e2f67265f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.IngredientVisual
+  initialVisual: {fileID: 7992212631581032781}
 --- !u!1001 &8141747171290832410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,5 +125,10 @@ PrefabInstance:
 --- !u!4 &4906466053681072282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3812876574508226176, guid: 44325c67017631342b5f02792113e57b, type: 3}
+  m_PrefabInstance: {fileID: 8141747171290832410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7992212631581032781 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2168273082342694743, guid: 44325c67017631342b5f02792113e57b, type: 3}
   m_PrefabInstance: {fileID: 8141747171290832410}
   m_PrefabAsset: {fileID: 0}

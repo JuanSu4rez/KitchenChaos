@@ -19,17 +19,23 @@ namespace _Project.Scripts
 
         private void OnPreparationStepCompleted(object sender, PreparationStepCompletedEventArgs e)
         {
-            var result = KitchenObjectsVisualsManager.Instance.GetIngredientNewVisual(_ingredient, e.completedStepType);
+            var outputPrefab = KitchenObjectsVisualsManager.Instance.GetIngredientNewVisual(_ingredient, e.completedStepType);
              
-             // Destroy(initialVisual.gameObject);
-            // var outputPrefab = Instantiate(result, initialVisual.position, initialVisual.rotation, initialVisual.parent);
-            // var newVisual = result.GetComponent<MeshRenderer>();
-             
-            Debug.Log($"New visual: {result}");
-            Debug.Log(result.GetChild(0).GetChild(0).GetComponent<MeshRenderer>());
-            initialVisual = result.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().transform;
+            if (outputPrefab == null || outputPrefab.childCount == 0)
+            {
+                Debug.LogError($"Missing output visual for {_ingredient.name}. DOES THE CUSTOM SCRIPTABLE OBJECT EXISTS?", this);
+                Debug.LogError($"IT HAS BEEN ADDED TO THE KitchenObjectsVisualManager?", this);
+                return;
+            }
 
+            // The first child of the output prefab is its visual wrapper.
+            var visualTemplate = outputPrefab.GetChild(0);
+            var parent = initialVisual.parent;
+            var replacement = Instantiate(visualTemplate, parent, false);
 
+            initialVisual.gameObject.SetActive(false);
+            Destroy(initialVisual.gameObject);
+            initialVisual = replacement;
         }
 
         private void OnDisable() => _ingredient.OnPreparationStepCompleted -= OnPreparationStepCompleted;
