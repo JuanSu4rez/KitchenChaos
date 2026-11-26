@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6722887764526131778}
   - component: {fileID: 511930798342959905}
+  - component: {fileID: 3320157003649297586}
   m_Layer: 0
   m_Name: Cabbage
   m_TagString: Untagged
@@ -46,6 +47,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Ingredient
   KitchenObjectSo: {fileID: 11400000, guid: a90253a578f3d4c438070c1818ee382d, type: 2}
+  _ingredientState: 0
+--- !u!114 &3320157003649297586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884039267752426967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba892d3d0a94dd78d5a40e2f67265f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.IngredientVisual
+  initialVisual: {fileID: 228248058980504450}
 --- !u!1001 &7547441831367529100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,6 +118,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 259702638197d9246bfc6f2b0fe88c09, type: 3}
+--- !u!4 &228248058980504450 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7752665549655589134, guid: 259702638197d9246bfc6f2b0fe88c09, type: 3}
+  m_PrefabInstance: {fileID: 7547441831367529100}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6654043506592269324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3812876574508226176, guid: 259702638197d9246bfc6f2b0fe88c09, type: 3}

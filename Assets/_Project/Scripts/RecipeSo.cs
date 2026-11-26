@@ -9,6 +9,6 @@ namespace _Project.Scripts
     {
         public string Name;
         public Sprite sprite;
-        public List<IngredientSteps> tasks;
+        public List<IngredientPreparationSteps> tasks;
     }
 }

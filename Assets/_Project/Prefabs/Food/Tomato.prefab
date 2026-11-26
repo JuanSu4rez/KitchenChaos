@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6722887764526131778}
   - component: {fileID: 1202618014260285563}
+  - component: {fileID: 6725606590893794662}
   m_Layer: 0
   m_Name: Tomato
   m_TagString: Untagged
@@ -46,6 +47,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Ingredient
   KitchenObjectSo: {fileID: 11400000, guid: 46cb395486300c188b69da9400f3dea6, type: 2}
+  _ingredientState: 0
+--- !u!114 &6725606590893794662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884039267752426967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba892d3d0a94dd78d5a40e2f67265f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.IngredientVisual
+  initialVisual: {fileID: 5696854525631836419}
 --- !u!1001 &1656997884885765305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,6 +113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tomato_Visual
       objectReference: {fileID: 0}
+    - target: {fileID: 5312753404516484821, guid: 81e9fe7b3cd084242a088e945f531f38, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -106,5 +125,10 @@ PrefabInstance:
 --- !u!4 &2455827145843808825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3812876574508226176, guid: 81e9fe7b3cd084242a088e945f531f38, type: 3}
+  m_PrefabInstance: {fileID: 1656997884885765305}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5696854525631836419 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6481134847177539002, guid: 81e9fe7b3cd084242a088e945f531f38, type: 3}
   m_PrefabInstance: {fileID: 1656997884885765305}
   m_PrefabAsset: {fileID: 0}

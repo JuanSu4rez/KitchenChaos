@@ -1,45 +1,35 @@
 using System;
-using System.Net.Mime;
 using _Project.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
+// A counter bar follows its held ingredient; an ingredient bar follows its own preparation.
 public class ProgressBarUI : MonoBehaviour
 {
-    [SerializeField] private Interactable _interactable;
+    [SerializeField] private GameObject progressSourceObject;
     [SerializeField] private Image barImage;
-
+    private CookingTask _progressSource;
+    
     private void Start()
     {
-        _interactable.GetCookingStep().OnProgressChanged += OnProgressChanged;
-        barImage.fillAmount = 0;
-        Hide();
+        _progressSource = progressSourceObject?.GetComponent<FoodProcessingObject>().GetCookingTask();
+        _progressSource.OnProgressChanged += OnProgressChanged;
+        UpdateBar(_progressSource.ProgressNormalized);
     }
 
     private void OnDestroy()
     {
-        _interactable.GetCookingStep().OnProgressChanged -= OnProgressChanged;
-    }
-
-    private void OnProgressChanged(object sender, CookingStep.OnProgressChangedEventArgs e)
-    {
-        barImage.fillAmount = e.progressNormalized;
-        if (e.progressNormalized <= 0f || e.progressNormalized >= 1f)
+        if (_progressSource != null)
         {
-            Hide();
-            return;
+            _progressSource.OnProgressChanged -= OnProgressChanged;
         }
-        
-        Show();
     }
 
-    private void Show()
-    {
-        gameObject.SetActive(true);
-    }
+    private void OnProgressChanged(object sender, CookingTask.ProgressChangedEventArgs e) => UpdateBar(e.progressNormalized);
 
-    private void Hide()
-    {
-        gameObject.SetActive(false);
+    private void UpdateBar(float progressNormalized)
+    {   
+        barImage.fillAmount = progressNormalized;
+        gameObject.SetActive(progressNormalized > 0f && progressNormalized < 1f);
     }
 }

@@ -1,22 +1,35 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace _Project.Scripts
 {
-    [Serializable]
     public class Ingredient : KitchenObject
     {
-        private bool _isLocked;
-        private IngredientStates _state;
-        private List<StepTypes> _completedSteps = new();
+        public event EventHandler<PreparationStepCompletedEventArgs> OnPreparationStepCompleted;
+    
+        public class PreparationStepCompletedEventArgs : EventArgs
+        {
+            public KitchenObjectSO KitchenObjectSo;
+            public CookingStepTypes completedStepType;
+        }
         
-        public void AddStepCompleted(StepTypes step) => _completedSteps.Add(step);
+        [SerializeField] private IngredientStates _ingredientState;
         
-        public bool IsNextStep(StepTypes step, List<StepTypes> requiredSteps) =>
-            _completedSteps.Count < requiredSteps.Count && requiredSteps[_completedSteps.Count] == step;
+        private readonly List<CookingStepTypes> _completedCookingSteps = new();
 
-        public bool IsReady(List<StepTypes> requiredSteps) => _completedSteps.Count >= requiredSteps.Count;
+        public void AddCookingStep(CookingStepTypes stepType)
+        {
+            _completedCookingSteps.Add(stepType);
+            OnPreparationStepCompleted?
+                .Invoke(
+                this, 
+                new PreparationStepCompletedEventArgs { completedStepType = stepType, KitchenObjectSo = KitchenObjectSo }
+                );
+        }
+        
+        public IngredientStates GetIngredientState() => _ingredientState;
+        public List<CookingStepTypes> GetCompletedCookingSteps() => _completedCookingSteps;
+
     }
 }

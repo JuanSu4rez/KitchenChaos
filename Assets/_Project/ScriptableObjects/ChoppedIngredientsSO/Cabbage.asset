@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8041ea7d93904cb9af1daa92fe5dc364, type: 3}
+  m_Name: Cabbage
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.ChoppedIngredientsSO
+  stepType: 1
+  ingredientInput: {fileID: 6722887764526131778, guid: 62c554adee8ddae18b6f30105d2be872, type: 3}
+  ingredientOutput: {fileID: 6722887764526131778, guid: 1b4ff2140adf2b3328d0d9adc2a6886a, type: 3}
+  objectName: Cabbage

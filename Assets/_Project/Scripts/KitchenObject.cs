@@ -17,7 +17,6 @@ namespace _Project.Scripts
         {
             if (interactable.HasAnObject())
             {
-                Debug.Log("Interactable is not available");
                 return;
             }
             
@@ -32,6 +31,11 @@ namespace _Project.Scripts
             //PARENTING POINT
             transform.parent = _interactableParent.GetParentingPoint();
             transform.localPosition = Vector3.zero;
+        }
+        
+        public void DestroySelf() {
+            _interactableParent.ClearKitchenObject();
+            Destroy(gameObject);
         }
     }
 }
