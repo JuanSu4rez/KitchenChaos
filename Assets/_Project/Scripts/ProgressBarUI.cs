@@ -8,24 +8,24 @@ public class ProgressBarUI : MonoBehaviour
 {
     [SerializeField] private GameObject progressSourceObject;
     [SerializeField] private Image barImage;
-    private CookingTask _progressSource;
+    private IHasKitchenTask _progressSource;
     
     private void Start()
-    {
-        _progressSource = progressSourceObject?.GetComponent<FoodProcessingObject>().GetCookingTask();
-        _progressSource.OnProgressChanged += OnProgressChanged;
-        UpdateBar(_progressSource.ProgressNormalized);
+    {   
+        _progressSource = transform.parent.GetComponent<IHasKitchenTask>();
+        _progressSource.KitchenTask.OnProgressChanged += OnProgressChanged;
+        UpdateBar(_progressSource.KitchenTask.ProgressNormalized);
     }
 
     private void OnDestroy()
     {
         if (_progressSource != null)
         {
-            _progressSource.OnProgressChanged -= OnProgressChanged;
+            _progressSource.KitchenTask.OnProgressChanged -= OnProgressChanged;
         }
     }
 
-    private void OnProgressChanged(object sender, CookingTask.ProgressChangedEventArgs e) => UpdateBar(e.progressNormalized);
+    private void OnProgressChanged(object sender, KitchenTask.ProgressChangedEventArgs e) => UpdateBar(e.progressNormalized);
 
     private void UpdateBar(float progressNormalized)
     {   

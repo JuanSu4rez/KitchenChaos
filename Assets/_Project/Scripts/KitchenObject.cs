@@ -37,5 +37,7 @@ namespace _Project.Scripts
             _interactableParent.ClearKitchenObject();
             Destroy(gameObject);
         }
+        
+        public IKitchenObjectParent GetParentObject() => _interactableParent;
     }
 }
